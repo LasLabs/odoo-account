@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    © 2014-TODAY LasLabs Inc.
+    @license AGPL-3 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<openerp>
+    <data>
+    
+        <record id="res_partner_view_form" model="ir.ui.view">
+            <field name="name">res.partner.view.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='opt_out']" position="after">
+                    <field name="invoice_cc_ids"
+                           widget="many2many_tags"
+                           options="{'no_create': True}"
+                           domain="[('parent_id', '=', id)]"/>
+                </xpath>
+            </field>
+            
+        </record>
+    
+    </data>
+</openerp>
