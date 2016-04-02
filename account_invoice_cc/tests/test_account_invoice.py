@@ -3,9 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp.tests.common import TransactionCase
-import logging
-
-_logger = logging.getLogger(__name__)
 
 
 class TestAccountInvoice(TransactionCase):
@@ -17,7 +14,7 @@ class TestAccountInvoice(TransactionCase):
         })
         self.partner_id = self.env['res.partner'].create({
             'name': 'Test Partner',
-            'invoice_cc_ids': ((4, self.cc_partner_id.id, 0)),
+            'invoice_cc_ids': [(4, self.cc_partner_id.id, 0)],
         })
         self.product_id = self.env['product.product'].create({
             'name': 'Test Product',
@@ -50,7 +47,7 @@ class TestAccountInvoice(TransactionCase):
         self.assertTrue(
             self.env['mail.followers'].search([
                 ('partner_id', '=', self.cc_partner_id.id),
-                ('res_model', '=', 'account.invoice'),
                 ('res_id', '=', self.invoice_id.id),
+                ('res_model', '=', 'account.invoice'),
             ])
         )

@@ -15,5 +15,7 @@ class AccountInvoice(models.Model):
     @api.multi
     def invoice_validate(self):
         for rec_id in self:
-            rec_id.message_subscribe([p.id for p in rec_id.partner_cc_to_ids])
+            rec_id.message_subscribe([
+                p.id for p in rec_id.partner_id.invoice_cc_ids
+            ])
         return super(AccountInvoice, self).invoice_validate()
